@@ -3,6 +3,11 @@ import scrapy
 from ..items import RrrGlobalItem
 from scrapy.loader import ItemLoader
 import datetime
+from scrapy.crawler import CrawlerProcess
+from twisted.internet import reactor, defer
+from scrapy.crawler import CrawlerRunner
+from scrapy.utils.log import configure_logging
+from scrapy.utils.project import get_project_settings
 
 
 class RrrglobalSpider(scrapy.Spider):
@@ -45,3 +50,11 @@ class RrrglobalSpider(scrapy.Spider):
         il.add_xpath('vw', "//a[contains(text(),'Volkswagen')]/span")
         il.add_value('timeStamp', datetime.datetime.now().isoformat())
         yield il.load_item()
+
+class categoryStockMercedes(scrapy.Spider):
+    name = 'categoryStockMercedes'
+    allowed_domains = ['rrr.lt']
+    start_urls = ['https://rrr.lt/lt/get_parts_ajax?q=mercedes']
+
+    def parse(self, response):
+        print(response.body)
