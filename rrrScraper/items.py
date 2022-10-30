@@ -6,7 +6,6 @@ def remove_whitespace(text):
     return ''.join(text.split())
 
 class rrrGlobalStockItem(scrapy.Item):
-    # define the fields for your item here like:
     audi = scrapy.Field(input_processor=MapCompose(remove_tags,remove_whitespace),
                         output_processor=TakeFirst())
     alfaRomeo = scrapy.Field(input_processor=MapCompose(remove_tags,remove_whitespace),
@@ -73,5 +72,23 @@ class rrrGlobalStockItem(scrapy.Item):
     pass
 
 class categoryStockMercedesItem(scrapy.Item):
-    categories = scrapy.Field()
+    apsvietimo_sistema = scrapy.Field(output_processor=TakeFirst())
+    degalu_misinio_sistema = scrapy.Field(output_processor=TakeFirst())
+    duju_ismetimo_sistema = scrapy.Field(output_processor=TakeFirst())
+    durys = scrapy.Field(output_processor=TakeFirst())
+    galine_asis = scrapy.Field(output_processor=TakeFirst())
+    galines_isores_detales = scrapy.Field(output_processor=TakeFirst())
+    kebulas_kebulo_dalys_kablys = scrapy.Field(output_processor=TakeFirst())
+    kitos_detales = scrapy.Field(output_processor=TakeFirst())
+    oro_kondicianavimo_sistema_radiatoriai = scrapy.Field(output_processor=TakeFirst())
+    pavaru_deze_sankaba_transmisija = scrapy.Field(output_processor=TakeFirst())
+    priekine_asis = scrapy.Field(output_processor=TakeFirst())
+    priekines_isores_detales = scrapy.Field(output_processor=TakeFirst())
+    prietaisai_jungikliai_el_sistema = scrapy.Field(output_processor=TakeFirst())
+    ratai_padangos_gaubtai = scrapy.Field(output_processor=TakeFirst())
+    salonas_interjeras = scrapy.Field(output_processor=TakeFirst())
+    stabdziu_sistema = scrapy.Field(output_processor=TakeFirst())
+    stiklai = scrapy.Field(output_processor=TakeFirst())
+    stiklu_apiplovimo_valymo_sistema = scrapy.Field(output_processor=TakeFirst())
+    variklis = scrapy.Field(output_processor=TakeFirst())
     pass
