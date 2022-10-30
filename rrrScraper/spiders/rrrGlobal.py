@@ -1,16 +1,19 @@
+import json
 from select import select
+from requests import request
 import scrapy
-from ..items import RrrGlobalItem
+from ..items import categoryStockMercedesItem, rrrGlobalStockItem
 from scrapy.loader import ItemLoader
 import datetime
 
-class RrrglobalSpider(scrapy.Spider):
-    name = 'rrrGlobal'
+class rrrGlobalStockSpider(scrapy.Spider):
+    name = 'rrrGlobalStock'
     allowed_domains = ['rrr.lt']
     start_urls = ['http://rrr.lt/']
+    custom_settings = {'ITEM_PIPELINES': {'rrrScraper.pipelines.rrrGlobalStockPipeline': 300}}
 
     def parse(self, response):     
-        il = ItemLoader(item=RrrGlobalItem(), selector=response)
+        il = ItemLoader(item=rrrGlobalStockItem(), selector=response)
         il.add_xpath('audi', "//a[contains(text(),'Audi')]/span")
         il.add_xpath('alfaRomeo', "//a[contains(text(),'Alfa Romeo')]/span")
         il.add_xpath('bmw', "//a[contains(text(),'BMW')]/span")
@@ -45,10 +48,14 @@ class RrrglobalSpider(scrapy.Spider):
         il.add_value('timeStamp', datetime.datetime.now().isoformat())
         yield il.load_item()
 
-class categoryStockMercedes(scrapy.Spider):
-    name = 'categoryStockMercedes'
+class categoryStockSpider(scrapy.Spider):
+    name = 'rrrCategoryStock'
     allowed_domains = ['rrr.lt']
     start_urls = ['https://rrr.lt/lt/get_parts_ajax?q=mercedes']
+    custom_settings = {'ITEM_PIPELINES': {'rrrScraper.pipelines.rrrCategoryStockPipeline': 400}}
 
     def parse(self, response):
-        print(response.body)
+        data = json.loads(response)
+        # for categories in data['categories']['134']:
+        #     yield request(categories['part_count'], callback=self)
+    

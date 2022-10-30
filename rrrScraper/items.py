@@ -5,7 +5,7 @@ from w3lib.html import remove_tags
 def remove_whitespace(text):
     return ''.join(text.split())
 
-class RrrGlobalItem(scrapy.Item):
+class rrrGlobalStockItem(scrapy.Item):
     # define the fields for your item here like:
     audi = scrapy.Field(input_processor=MapCompose(remove_tags,remove_whitespace),
                         output_processor=TakeFirst())
@@ -70,4 +70,8 @@ class RrrGlobalItem(scrapy.Item):
     vw = scrapy.Field(input_processor=MapCompose(remove_tags,remove_whitespace),
                         output_processor=TakeFirst())
     timeStamp = scrapy.Field(output_processor=TakeFirst())
+    pass
+
+class categoryStockMercedesItem(scrapy.Item):
+    categories = scrapy.Field()
     pass

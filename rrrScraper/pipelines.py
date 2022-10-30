@@ -9,7 +9,7 @@ from itemadapter import ItemAdapter
 
 # https://github.com/RockyZ/Scrapy-sqlite-item-exporter/blob/master/exporters.py
 
-class RrrscraperPipeline:
+class rrrGlobalStockPipeline:
     
     def __init__(self):
         self.con = sqlite3.connect('rrrGlobalStock.db')
@@ -90,3 +90,6 @@ class RrrscraperPipeline:
                          item['vw'],))
         self.con.commit()
         return item
+
+class rrrCategoryStockPipeline:
+    pass
