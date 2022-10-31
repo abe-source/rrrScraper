@@ -64,7 +64,8 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'rrrScraper.pipelines.rrrGlobalStockPipeline': 300,
-   'rrrScraper.pipelines.rrrCategoryStockPipeline': 400
+   'rrrScraper.pipelines.rrrCategoryStockPipeline': 400,
+   'rrrScraper.pipelines.rrrCategoryStockPipeline2': 401
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

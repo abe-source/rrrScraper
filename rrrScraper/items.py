@@ -91,4 +91,6 @@ class categoryStockMercedesItem(scrapy.Item):
     stiklai = scrapy.Field(output_processor=TakeFirst())
     stiklu_apiplovimo_valymo_sistema = scrapy.Field(output_processor=TakeFirst())
     variklis = scrapy.Field(output_processor=TakeFirst())
+    timeStamp = scrapy.Field(output_processor=TakeFirst())
+    currentPage = scrapy.Field(output_processor=TakeFirst())
     pass

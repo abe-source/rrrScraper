@@ -1,15 +1,16 @@
+import datetime
 import json
 from select import select
 from requests import request
 import scrapy
-from ..items import categoryStockMercedesItem, rrrGlobalStockItem
+from ..items import categoryStockMercedesItem
 from scrapy.loader import ItemLoader
 
 
 class categoryStockSpider(scrapy.Spider):
     name = 'rrrCategoryStock'
-    allowed_domains = ['rrr.lt']
-    start_urls = ['https://rrr.lt/lt/get_parts_ajax?q=mercedes']
+    allowed_domains = ['pstmn.io']
+    start_urls = ['https://851ea191-8b5f-4052-8e39-f38cf44e3373.mock.pstmn.io/lt/get_parts_ajax?q=mercedes']
     custom_settings = {'ITEM_PIPELINES': {'rrrScraper.pipelines.rrrCategoryStockPipeline': 400}}
 
     def parse(self, response):
@@ -34,6 +35,12 @@ class categoryStockSpider(scrapy.Spider):
         il.add_value('stiklai', data['categories']['1189']['part_count'])
         il.add_value('stiklu_apiplovimo_valymo_sistema', data['categories']['98']['part_count'])
         il.add_value('variklis', data['categories']['250']['part_count'])
+        il.add_value('timeStamp', datetime.datetime.now().isoformat())
+        il.add_value('currentPage', response.request.url)
         yield il.load_item()
+
+        next_page = "https://851ea191-8b5f-4052-8e39-f38cf44e3373.mock.pstmn.io/lt/get_parts_ajax?q=bmw"
+
+        yield scrapy.Request(next_page, callback=self.parse)
 
  
