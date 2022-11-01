@@ -9,7 +9,7 @@ import rrrSettings
 
 class categoryStockSpider(scrapy.Spider):
     name = 'rrrCategoryStock'
-    allowed_domains = ['pstmn.io']
+    allowed_domains = ['rrr.lt']
     start_urls = rrrSettings.categoryStockSpiderUrls
     custom_settings = {'ITEM_PIPELINES': {'rrrScraper.pipelines.rrrCategoryStockPipeline': 400}}
 

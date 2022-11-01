@@ -1,7 +1,9 @@
 from urllib.parse import parse_qs, urlparse
 
-categoryStockSpiderUrls = ['https://851ea191-8b5f-4052-8e39-f38cf44e3373.mock.pstmn.io/lt/get_parts_ajax?q=mercedes',
-                           'https://851ea191-8b5f-4052-8e39-f38cf44e3373.mock.pstmn.io/lt/get_parts_ajax?q=bmw']
+categoryStockSpiderUrls = ['https://rrr.lt/lt/get_parts_ajax?q=mercedes',
+                           'https://rrr.lt/lt/get_parts_ajax?q=bmw',
+                           'https://rrr.lt/lt/get_parts_ajax?q=jaguar',
+                           'https://rrr.lt/lt/get_parts_ajax?q=vw']
 
 categoryStockUrlsCarMakes = []
 
