@@ -1,13 +1,6 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import sqlite3
-import urllib
 from urllib.parse import parse_qs, urlparse
-
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+import rrrSettings
 
 # https://github.com/RockyZ/Scrapy-sqlite-item-exporter/blob/master/exporters.py
 
@@ -101,7 +94,7 @@ class rrrCategoryStockPipeline:
         self.create_table()
 
     def create_table(self):
-        carMakeListForDb = ['Mercedes', 'Bmw']
+        carMakeListForDb = rrrSettings.categoryStockUrlsCarMakes
         for i in carMakeListForDb:
             self.cur.execute('''
             CREATE TABLE IF NOT EXISTS {}(
@@ -129,9 +122,8 @@ class rrrCategoryStockPipeline:
             '''.format("categoryStock" + i))
     
     def process_item(self, item, spider):
-        parsed = urlparse(item['currentPage'])
-        carMake = parse_qs(parsed.query)['q'][0].title()
-        tableName = "categoryStock" + carMake
+        carMake = rrrSettings.getCarMakeFromUrl(item['currentPage'])
+        tableName = rrrSettings.getTableName(carMake)
         self.cur.execute('''INSERT OR IGNORE INTO {} VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'''.format(tableName),
                         (item['timeStamp'],
                          item['apsvietimo_sistema'],
@@ -155,6 +147,3 @@ class rrrCategoryStockPipeline:
                          item['variklis'],))
         self.con.commit()
         return item
-
-class rrrCategoryStockPipeline2:
-    pass
